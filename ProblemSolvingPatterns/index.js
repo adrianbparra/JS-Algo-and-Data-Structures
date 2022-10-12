@@ -195,6 +195,86 @@ function countUniqueValues(arr) {
 // involves creating a window which can either be an array or number from one pos to another
 
 function maxSubarraySum(arr,num) {
-    
-    
+    let maxSum = 0;
+    let tempSum = 0;
+    if (arr.length < num) return null;
+    for (let i= 0; i<num; i++){
+        maxSum += arr[i]
+    }
+    tempSum = maxSum;
+    for(let i = num; i<arr.length; i++){
+        tempSum = tempSum - arr[i-num] + arr[i];
+        maxSum = Math.max(maxSum,tempSum);
+    }
+    return maxSum;
+
 }
+
+// console.log(maxSubarraySum([2,6,9,2,1,8,5,6,3],3))
+
+
+// ########## Divide and Conquer
+// involves dividing a data set into smalller chunks and then repeating a process with a subset of data
+// decreases time complexity
+
+// function search(arr,num) {
+    
+// }
+
+
+function sameFrequency(first,second){
+
+    let fstring = first.toString();
+    let sstring = second.toString();
+    
+    fObj = {}
+    sObj = {}
+
+
+    for(let i = 0; i < fstring.length; i++){
+        fObj[fstring[i]] = (fObj[fstring[i]] || 0) + 1
+    }
+    for(let i = 0; i < sstring.length; i++){
+        sObj[sstring[i]] = (sObj[sstring[i]] || 0) + 1
+    }
+
+
+    for(let k in fObj){
+        
+
+        if (k in sObj){
+            if (sObj[k] !== fObj[k]){
+                return false
+            }
+        } else{
+            return false
+        }
+    }
+    for(let k in sObj){
+        if (k in fObj){
+            if (sObj[k] !== fObj[k]){
+                return false
+            }
+        }else{
+            return false
+        }
+    }
+    return true
+  }
+
+// console.log(sameFrequency(22,222222));
+
+function areThereDuplicates() {
+    let collection = {}
+    for(let val in arguments){
+      collection[arguments[val]] = (collection[arguments[val]] || 0) + 1
+    }
+    for(let key in collection){
+      if(collection[key] > 1) return true
+    }
+    return false;
+}
+
+console.log(areThereDuplicates(1,2,3))
+
+
