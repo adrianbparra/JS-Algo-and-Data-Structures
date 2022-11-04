@@ -275,6 +275,49 @@ function areThereDuplicates() {
     return false;
 }
 
-console.log(areThereDuplicates(1,2,3))
+// console.log(areThereDuplicates(1,2,3))
 
 
+
+function averagePair(arr, num){
+    let start = 0
+    let end = arr.length-1;
+    while(start < end){
+      let avg = (arr[start]+arr[end]) / 2 
+      if(avg === num) return true;
+      else if(avg < num) start++
+      else end--
+    }
+    return false;
+}
+
+// console.log(averagePair([1,2,3,5,7,9,14,15,17,27,29],2.5))
+
+function isSubsequence(str1, str2) {
+    var i = 0;
+    var j = 0;
+    if (!str1) return true;
+    while (j < str2.length) {
+      if (str2[j] === str1[i]) i++;
+      if (i === str1.length) return true;
+      j++;
+    }
+    return false;
+}
+
+function maxSubarraySum(arr, num){
+    if (arr.length < num) return null;
+ 
+    let total = 0;
+    for (let i=0; i<num; i++){
+       total += arr[i];
+    }
+    let currentTotal = total;
+    for (let i = num; i < arr.length; i++) {
+       currentTotal += arr[i] - arr[i-num];
+       total = Math.max(total, currentTotal);
+    }
+    return total;
+}
+
+console.log(maxSubarraySum([1,4,62,2,7,34,27,43,74],2))
